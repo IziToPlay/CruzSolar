@@ -10,7 +10,7 @@ public interface TripService extends CrudService<Trip, Long>{
 	List<Trip> fetchTripByDptArrival(String dptArrival) throws Exception;
 	
 	
-	List<Trip> fetchTripByDptArrival(String depa1,String depa2, String date) throws Exception;
+	//List<Trip> fetchTripByDptArrival(String depa1,String depa2, String date) throws Exception;
 	
 	
 }

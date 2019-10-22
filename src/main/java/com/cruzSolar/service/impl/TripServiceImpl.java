@@ -49,7 +49,7 @@ public class TripServiceImpl implements TripService{
 		return tripRepository.fetchTripByDptArrival(dptArrival);
 	}
 
-	@Override
+	/*@Override
 	public List<Trip> fetchTripByDptArrival(String depa1, String depa2, String date) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -59,7 +59,7 @@ public class TripServiceImpl implements TripService{
 		
 		
 		return null;
-	}
+	}*/
 	
 	
 

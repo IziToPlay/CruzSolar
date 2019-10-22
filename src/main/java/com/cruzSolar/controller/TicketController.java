@@ -60,16 +60,18 @@ public class TicketController {
 	}
 	
 	@GetMapping("/searchClient")
-	public void searchClient(@RequestParam("dni") String dni, Model model){
+	public String searchClient(@RequestParam("dni") String dni, Model model){
 		
 		List<Client> clients=clientService.fetchClientByDni(dni);
 		model.addAttribute("clients", clients);
+		return "tickets/new";
 		
 	}
 	
 	@GetMapping("/connect/{id}")
-	public void connectClient(@PathVariable("id") long id) throws Exception {
+	public String connectClient(@PathVariable("id") long id) throws Exception {
 		client=clientService.getOneById(id);
+		return "tickets/new";
 	}
 	
 	

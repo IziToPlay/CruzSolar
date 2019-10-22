@@ -17,6 +17,6 @@ public interface TripRepository extends JpaRepository<Trip, Long>{
 	List<Trip> fetchTripByDptArrival(String dptArrival);
 	
 	
-	List<Trip> fetchTripByDptArrival(String depa1,String depa2, Date date) throws Exception;
+	//List<Trip> fetchTripByDptArrival(String depa1,String depa2, Date date) throws Exception;
 
 }
