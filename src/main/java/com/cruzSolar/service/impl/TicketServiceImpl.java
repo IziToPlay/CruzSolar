@@ -29,11 +29,11 @@ public class TicketServiceImpl implements TicketService{
 	public void update(Long id, Ticket entity) throws Exception {
 		Ticket currentTicket=getOneById(id);
 		
-		currentTicket.setClient(entity.getClient());
+		//currentTicket.setClient(entity.getClient());
 		currentTicket.setEmissionDate(entity.getEmissionDate());
-		currentTicket.setEmployee(entity.getEmployee());
+		//currentTicket.setEmployee(entity.getEmployee());
 		currentTicket.setSeat(entity.getSeat());
-		currentTicket.setTrip(entity.getTrip());
+		//currentTicket.setTrip(entity.getTrip());
 		ticketRepository.save(currentTicket);
 	}
 

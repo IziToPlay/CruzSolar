@@ -111,7 +111,7 @@ public class TicketController {
 	@PostMapping("/update/{id}")
     public String updateTicket(@PathVariable("id") long id, Ticket ticket) throws Exception {
         ticketService.update(id, ticket);
-        return "redirect:/tickets";    
+        return "redirect:/tickets/list";    
     }
 
 	public TicketService getTicketService() {
