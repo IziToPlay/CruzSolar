@@ -12,6 +12,6 @@ import com.cruzSolar.model.entity.Seat;
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Long>{
 	
-	@Query("select s from Seat s where s.bus.id=?1 and s.id NOT IN (select s1.id from Ticket t inner join Seat s1 on t.seat.id=s1.id)")
+	@Query("select s from Seat s where s.bus.id=?1  and s.id NOT IN (select s1.id from Ticket t inner join Seat s1 on t.seat.id=s1.id)")
 	List<Seat> findAllSeatsAvailables(Long bus_id);
 }
