@@ -48,6 +48,11 @@ public class TripServiceImpl implements TripService{
 	public List<Trip> fetchTripByDptArrival(String dptArrival) throws Exception {
 		return tripRepository.fetchTripByDptArrival(dptArrival);
 	}
+	
+	@Override
+	public List<Trip> fetchTripByDptDeparture(String dptDeparture) throws Exception {
+		return tripRepository.fetchTripByDptDeparture(dptDeparture);
+	}
 
 	/*@Override
 	public List<Trip> fetchTripByDptArrival(String depa1, String depa2, String date) throws Exception {

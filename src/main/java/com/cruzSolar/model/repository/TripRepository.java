@@ -12,6 +12,8 @@ import com.cruzSolar.model.entity.Trip;
 @Repository
 public interface TripRepository extends JpaRepository<Trip, Long>{
 	
+	@Query("select t from Trip t where t.dptDeparture like %?1%")
+	List<Trip> fetchTripByDptDeparture(String dptDeparture);
 	
 	@Query("select t from Trip t where t.dptArrival like %?1%")
 	List<Trip> fetchTripByDptArrival(String dptArrival);

@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cruzSolar.model.entity.Client;
+import com.cruzSolar.model.entity.Department;
+import com.cruzSolar.model.entity.Seat;
 import com.cruzSolar.model.entity.Trip;
 import com.cruzSolar.service.BusService;
 import com.cruzSolar.service.DepartmentService;
@@ -29,6 +30,8 @@ public class TripController {
 	@Autowired
 	private DepartmentService departmentService;
 	
+	List<Trip> trips;
+	
 	@GetMapping
 	public String showAllTrips(Model model) throws Exception {
 		model.addAttribute("trips", tripService.getAll());
@@ -37,11 +40,11 @@ public class TripController {
 		return "trips/list";
 	}
 	
-	@GetMapping("/search")
-	public String searchTrip(@RequestParam("dptArrival") String dptArrival, Model model){
+	
+	public  List<Trip> searchTrip(String dptDeparture, Model model){
 		try {
-			if(!dptArrival.isEmpty()) {
-				List<Trip> trips=tripService.fetchTripByDptArrival(dptArrival);
+			if(!dptDeparture.isEmpty()) {
+				trips=tripService.fetchTripByDptDeparture(dptDeparture);
 			if(!trips.isEmpty()) {
 				model.addAttribute("trips", trips);
 			}else {
@@ -55,6 +58,15 @@ public class TripController {
 		}catch(Exception e) {
 			model.addAttribute("Error Trip:", e.getMessage());
 		}
-		return "/trips/list";
+		return trips;
+	}
+	
+	@GetMapping("/searchTrip")
+	public String searchTrips(@RequestParam("dptDeparture") String dptDeparture, Model model) throws Exception{
+		model.addAttribute("trip", new Trip());
+		List<Trip> trips=searchTrip(dptDeparture, model);
+		model.addAttribute("trips", trips);
+		return "trips/list";
+		
 	}
 }
