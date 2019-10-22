@@ -20,7 +20,7 @@ public class SeatController {
 
 	@Autowired
 	private SeatService seatService;
-	
+	private String hola;
 	
 	@GetMapping
     public String showAllSeats(Model model, Long bus_id) throws Exception {
