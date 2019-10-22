@@ -13,6 +13,6 @@ import com.cruzSolar.model.entity.Trip;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-	@Query("select c from Client c where c.dni like %?1%")
+	@Query("select c from Client c where c.dni like ?1")
 	List <Client> fetchClientByDni(String dni);
 }

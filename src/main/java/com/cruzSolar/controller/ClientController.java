@@ -25,6 +25,7 @@ public class ClientController {
 	
 	
 	private Client client;
+	List<Client> clients;
 	
 	@GetMapping
     public String showAllClients(Model model){
@@ -36,11 +37,11 @@ public class ClientController {
         return "/tickets/new";
     }
 	
-	@GetMapping("/search")
-	public void searchClient(@RequestParam("dni") String dni, Model model){
+	
+	public List<Client> searchClient(String dni, Model model){
 		try {
 			if(!dni.isEmpty()) {
-				List<Client> clients=clientService.fetchClientByDni(dni);
+				clients=clientService.fetchClientByDni(dni);
 			if(!clients.isEmpty()) {
 				model.addAttribute("clients", clients);
 			}else {
@@ -53,8 +54,8 @@ public class ClientController {
 			}
 		}catch(Exception e) {
 			model.addAttribute("Error Cliente:", e.getMessage());
-			
 		}	
+		return clients;
 	}
 	
 	@GetMapping("/new")

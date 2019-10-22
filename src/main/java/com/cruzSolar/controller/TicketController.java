@@ -39,6 +39,9 @@ public class TicketController {
 	@Autowired
 	private TripService tripService;
 	
+	@Autowired
+	private ClientController clientController;
+	
 	private Client client;
 	private Trip trip;
 	
@@ -60,17 +63,25 @@ public class TicketController {
 	}
 	
 	@GetMapping("/searchClient")
-	public String searchClient(@RequestParam("dni") String dni, Model model){
-		
-		List<Client> clients=clientService.fetchClientByDni(dni);
+	public String searchClient(@RequestParam("dni") String dni, Model model) throws Exception{
+		model.addAttribute("ticket", new Ticket());
+		List<Client> clients=clientController.searchClient(dni, model);
 		model.addAttribute("clients", clients);
+		List<Seat> seats = seatService.findAllSeatsAvailables(trip.getId());
+		model.addAttribute("seats",seats);
 		return "tickets/new";
 		
 	}
 	
 	@GetMapping("/connect/{id}")
-	public String connectClient(@PathVariable("id") long id) throws Exception {
+	public String connectClient(@PathVariable("id") long id,Model model) throws Exception {
+		model.addAttribute("ticket", new Ticket());
 		client=clientService.getOneById(id);
+		List<Client> clients = clientService.getAll();
+		model.addAttribute("clients",clients);
+		List<Seat> seats = seatService.findAllSeatsAvailables(trip.getId());
+		model.addAttribute("seats",seats);
+		
 		return "tickets/new";
 	}
 	
@@ -81,7 +92,7 @@ public class TicketController {
 		ticket.setTrip(trip);
 		ticket.setClient(client);
         long id = ticketService.create(ticket);
-        return "redirect:/tickets";
+        return "redirect:/trips";
     }
 	
 	@GetMapping("/edit/{id}")
