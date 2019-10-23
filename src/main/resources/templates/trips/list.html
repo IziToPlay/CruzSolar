@@ -7,20 +7,35 @@
 	<div class="container">
 
 		<div class="card" style="max-width: 100%;">
+
 			<div class="card-header">Mantenimiento Viajes</div>
 			<div class="card-body">
-			
+
 				<form th:action="@{/trips/searchTrip}" method="get">
 
 					<div class="form-row align-items-center">
 
 						<div class="col-auto">
-							<Label class="sr-only" for="inputDptDeparture">Datos a completar</Label> <input
-								id="inputDptDeparture" type="text" class="form-control form-control-lg"
-								name="dptDeparture" 
+							<Label class="sr-only" for="inputDptDeparture">Datos a completar</Label> 
+								<input id="inputDptDeparture" type="text" class="form-control form-control-lg" 
+								name="dptDeparture"
 								placeholder="Origen a buscar">
-
 						</div>
+						
+						<div class="col-auto">
+							<Label class="sr-only" for="inputDptArrival">Datos a completar</Label> 
+								<input id="inputDptArrival" type="text" class="form-control form-control-lg" 
+								name="dptArrival"
+								placeholder="Destino a buscar">
+						</div>
+						
+						<div class="col-auto">
+							<Label class="sr-only" for="inputStartDate">Datos a completar</Label> 
+								<input id="inputStartDate" type="text" class="form-control form-control-lg" 
+								name="startDate"
+								placeholder="Fecha de ida">
+						</div>
+						
 						<div class="col-auto">
 							<button type="submit" class="btn btn-primary">Buscar</button>
 
@@ -53,7 +68,6 @@
 							<td th:text="${trip.bus.quantitySeat}">cruzSolar</td>
 							<td th:text="${trip.bus.id}">cruzSolar</td>
 							<td th:text="${trip.price}">cruzSolar</td>
-
 							<td><a th:href="@{'/tickets/new/' + ${trip.id}}"
 								class="btn btn-primary">Viaje</a></td>
 						</tr>
