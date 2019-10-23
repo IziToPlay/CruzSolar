@@ -44,6 +44,7 @@ public class TicketController {
 	
 	private Client client;
 	private Trip trip;
+	List<Ticket> tickets ;
 	
 	@GetMapping("/list")
     public String showAllTickets(Model model) throws Exception {
@@ -84,6 +85,43 @@ public class TicketController {
 		
 		return "tickets/new";
 	}
+	
+	public List<Ticket> searchTickets(String fechaemision, Model model){
+		
+		try {	
+			if(!fechaemision.isEmpty()) {
+				tickets=ticketService.fetchTicketByFechaEmission(fechaemision);
+				
+			if(!tickets.isEmpty()) {
+				model.addAttribute("tickets", tickets);
+			}else {
+				model.addAttribute("info", "No existen coincidencias");
+				model.addAttribute("tickets",ticketService.getAll());
+				}
+			}else {
+				model.addAttribute("info", "Debe completar el campo de búsqueda.");
+				model.addAttribute("tickets",ticketService.getAll());
+			}
+		}catch(Exception e) {
+			model.addAttribute("Error Ticket:", e.getMessage());
+		}	
+		return tickets;
+	}
+	
+	@GetMapping("/searchTicket")
+	public String searchTicket(@RequestParam("fechaemision") String fechaemision, Model model) throws Exception{
+		model.addAttribute("ticket", new Ticket());
+		List<Ticket>tickets= searchTickets(fechaemision, model);
+		model.addAttribute("tickets", tickets);
+		//List<Seat> seats = seatService.findAllSeatsAvailables(trip.getId());
+		//model.addAttribute("seats",seats);
+		return "tickets/list";
+		
+	}
+	
+	
+	
+	
 	
 	
 	

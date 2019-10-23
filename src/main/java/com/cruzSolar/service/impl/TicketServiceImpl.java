@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cruzSolar.model.entity.Client;
 import com.cruzSolar.model.entity.Ticket;
 import com.cruzSolar.model.repository.TicketRepository;
 import com.cruzSolar.service.TicketService;
@@ -54,6 +55,11 @@ public class TicketServiceImpl implements TicketService{
 	@Override
 	public Ticket getOneById(Long id) throws Exception {
 		return ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("Ticket Not Found!"));
+	}
+	
+	@Override
+	public List<Ticket> fetchTicketByFechaEmission(String emision) {
+		return ticketRepository.fetchTicketByFechaEmission(emision);
 	}
 
 }
