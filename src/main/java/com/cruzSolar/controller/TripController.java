@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cruzSolar.model.entity.Client;
-import com.cruzSolar.model.entity.Department;
-import com.cruzSolar.model.entity.Seat;
 import com.cruzSolar.model.entity.Trip;
 import com.cruzSolar.service.BusService;
 import com.cruzSolar.service.DepartmentService;
@@ -30,9 +27,10 @@ public class TripController {
 	@Autowired
 	private DepartmentService departmentService;
 	
+	private Trip trip;
 	List<Trip> trips;
 	
-	@GetMapping
+	@GetMapping("/list")
 	public String showAllTrips(Model model) throws Exception {
 		model.addAttribute("trips", tripService.getAll());
 		model.addAttribute("buses", busService.getAll());
@@ -40,11 +38,10 @@ public class TripController {
 		return "trips/list";
 	}
 	
-	
-	public  List<Trip> searchTrip(String dptDeparture, Model model){
+	public  List<Trip> searchTrip(String dptDeparture,String dptArrival,String startDate, Model model){
 		try {
 			if(!dptDeparture.isEmpty()) {
-				trips=tripService.fetchTripByDptDeparture(dptDeparture);
+				trips=tripService.fetchTripByDpt(dptDeparture,dptArrival,startDate);
 			if(!trips.isEmpty()) {
 				model.addAttribute("trips", trips);
 			}else {
@@ -62,11 +59,43 @@ public class TripController {
 	}
 	
 	@GetMapping("/searchTrip")
-	public String searchTrips(@RequestParam("dptDeparture") String dptDeparture, Model model) throws Exception{
-		model.addAttribute("trip", new Trip());
-		List<Trip> trips=searchTrip(dptDeparture, model);
-		model.addAttribute("trips", trips);
+	public String searchTrips(@RequestParam("dptDeparture") String dptDeparture, @RequestParam("dptArrival") String dptArrival, @RequestParam("startDate") String startDate, Model model) throws Exception{
+		
+		model.addAttribute("trips",searchTrip(dptDeparture,dptArrival,startDate, model));
 		return "trips/list";
 		
 	}
+
+	public Trip getTrip() {
+		return trip;
+	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
+
+	public TripService getTripService() {
+		return tripService;
+	}
+
+	public void setTripService(TripService tripService) {
+		this.tripService = tripService;
+	}
+
+	public BusService getBusService() {
+		return busService;
+	}
+
+	public void setBusService(BusService busService) {
+		this.busService = busService;
+	}
+
+	public DepartmentService getDepartmentService() {
+		return departmentService;
+	}
+
+	public void setDepartmentService(DepartmentService departmentService) {
+		this.departmentService = departmentService;
+	}
 }
+

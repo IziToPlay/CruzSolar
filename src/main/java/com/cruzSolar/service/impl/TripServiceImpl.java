@@ -1,6 +1,5 @@
 package com.cruzSolar.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +49,8 @@ public class TripServiceImpl implements TripService{
 	}
 	
 	@Override
-	public List<Trip> fetchTripByDptDeparture(String dptDeparture) throws Exception {
-		return tripRepository.fetchTripByDptDeparture(dptDeparture);
+	public List<Trip> fetchTripByDpt(String dptDeparture,String dptArrival, String startDate) throws Exception {
+		return tripRepository.fetchTripByDpt(dptDeparture,dptArrival, startDate);
 	}
 
 	/*@Override
@@ -69,3 +68,4 @@ public class TripServiceImpl implements TripService{
 	
 
 }
+
