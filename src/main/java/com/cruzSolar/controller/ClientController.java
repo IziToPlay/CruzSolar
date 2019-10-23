@@ -44,7 +44,7 @@ public class ClientController {
 				clients=clientService.fetchClientByDni(dni);
 				model.addAttribute("success", "Búsqueda realizada correctamente");
 			if(!clients.isEmpty()) {
-				clients=clientService.getAll();
+				
 				model.addAttribute("clients", clients);
 			}else {
 				clients=clientService.getAll();
