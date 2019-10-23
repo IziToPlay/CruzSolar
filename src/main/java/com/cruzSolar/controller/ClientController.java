@@ -39,6 +39,7 @@ public class ClientController {
 	
 	
 	public List<Client> searchClient(String dni, Model model){
+		
 		try {
 			if(!dni.isEmpty()) {
 				clients=clientService.fetchClientByDni(dni);
