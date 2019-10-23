@@ -35,7 +35,7 @@
 							<td th:text="${ticket.client.dni}">cruzSolar</td>
 							<td th:text="${ticket.trip.dptDeparture.name}">cruzSolar</td>
 							<td th:text="${ticket.trip.dptArrival.name}">cruzSolar</td>
-							<td th:text="${ticket.seat.id}">cruzSolar</td>
+							<td th:text="${ticket.seat.number}">cruzSolar</td>
 						
 							<td><a th:href="@{'/tickets/edit/' + ${ticket.id} }"
 								class="btn btn-primary">Editar</a></td>
