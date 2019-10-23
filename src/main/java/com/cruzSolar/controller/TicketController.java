@@ -129,11 +129,11 @@ public class TicketController {
 	
 	@PostMapping("/save")
     public String saveNewTicket(Ticket ticket, Model model) throws Exception {
+		
 		ticket.setTrip(trip);
 		ticket.setClient(client);
         long id = ticketService.create(ticket);
-        
-        return "redirect:/trips";
+        return "redirect:/trips/list";
     }
 	
 	@GetMapping("/edit/{id}")

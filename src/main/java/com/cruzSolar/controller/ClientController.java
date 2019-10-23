@@ -53,7 +53,7 @@ public class ClientController {
 				}
 			}else {
 				clients=clientService.getAll();
-				model.addAttribute("error", "Debe completar los campos de búsqueda.");
+				model.addAttribute("error", "Debe completar el campo de búsqueda.");
 				model.addAttribute("clients",clients);
 			}
 		}catch(Exception e) {
