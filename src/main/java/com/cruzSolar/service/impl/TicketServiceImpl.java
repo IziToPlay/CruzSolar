@@ -59,7 +59,9 @@ public class TicketServiceImpl implements TicketService{
 	
 	@Override
 	public List<Ticket> fetchTicketByFechaEmission(String emision) {
+	
 		return ticketRepository.fetchTicketByFechaEmission(emision);
 	}
+	
 
 }

@@ -111,6 +111,7 @@ public class TicketController {
 	
 	@GetMapping("/searchTicket")
 	public String searchTicket(@RequestParam("fechaemision") String fechaemision, Model model) throws Exception{
+		
 		model.addAttribute("ticket", new Ticket());
 		List<Ticket>tickets= searchTickets(fechaemision, model);
 		model.addAttribute("tickets", tickets);
