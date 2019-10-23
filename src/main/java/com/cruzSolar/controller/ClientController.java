@@ -42,18 +42,22 @@ public class ClientController {
 		try {
 			if(!dni.isEmpty()) {
 				clients=clientService.fetchClientByDni(dni);
+				model.addAttribute("success", "Búsqueda realizada correctamente");
 			if(!clients.isEmpty()) {
+				clients=clientService.getAll();
 				model.addAttribute("clients", clients);
 			}else {
+				clients=clientService.getAll();
 				model.addAttribute("info", "No existen coincidencias");
-				model.addAttribute("clients",clientService.getAll());
+				model.addAttribute("clients",clients);
 				}
 			}else {
-				model.addAttribute("info", "Debe completar el campo de búsqueda.");
-				model.addAttribute("clients",clientService.getAll());
+				clients=clientService.getAll();
+				model.addAttribute("error", "Debe completar los campos de búsqueda.");
+				model.addAttribute("clients",clients);
 			}
 		}catch(Exception e) {
-			model.addAttribute("Error Cliente:", e.getMessage());
+			model.addAttribute("error", e.getMessage());
 		}	
 		return clients;
 	}

@@ -82,6 +82,7 @@ public class TicketController {
 		model.addAttribute("clients",clients);
 		List<Seat> seats = seatService.findAllSeatsAvailables(trip.getId());
 		model.addAttribute("seats",seats);
+		model.addAttribute("success","Cliente seleccionado correctamente");
 		
 		return "tickets/new";
 	}
@@ -126,10 +127,11 @@ public class TicketController {
 	
 	
 	@PostMapping("/save")
-    public String saveNewTicket(Ticket ticket) throws Exception {
+    public String saveNewTicket(Ticket ticket, Model model) throws Exception {
 		ticket.setTrip(trip);
 		ticket.setClient(client);
         long id = ticketService.create(ticket);
+        
         return "redirect:/trips";
     }
 	
@@ -147,8 +149,9 @@ public class TicketController {
     }
 
 	@PostMapping("/update/{id}")
-    public String updateTicket(@PathVariable("id") long id, Ticket ticket) throws Exception {
+    public String updateTicket(@PathVariable("id") long id, Ticket ticket,Model model) throws Exception {
         ticketService.update(id, ticket);
+        model.addAttribute("success","Ticket actualizado correctamente");
         return "redirect:/tickets/list";    
     }
 
