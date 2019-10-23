@@ -40,12 +40,12 @@ public class TripController {
 	
 	public  List<Trip> searchTrip(String dptDeparture,String dptArrival,String startDate, Model model){
 		try {
-			if(!dptDeparture.isEmpty()) {
+			if(!dptDeparture.isEmpty() && !dptArrival.isEmpty() && !startDate.isEmpty()) {
 				trips=tripService.fetchTripByDpt(dptDeparture,dptArrival,startDate);
 			if(!trips.isEmpty()) {
 				model.addAttribute("trips", trips);
 			}else {
-				model.addAttribute("info", "No existen coincidencias");
+				model.addAttribute("info", "No se han encontrado coincidencias");
 				model.addAttribute("trips",tripService.getAll());
 				}
 			}else {
