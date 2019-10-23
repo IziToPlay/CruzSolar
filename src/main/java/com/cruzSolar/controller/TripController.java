@@ -41,6 +41,7 @@ public class TripController {
 	public  List<Trip> searchTrip(String dptDeparture,String dptArrival,String startDate, Model model){
 		try {
 			if(!dptDeparture.isEmpty() && !dptArrival.isEmpty() && !startDate.isEmpty()) {
+				model.addAttribute("info", "Búsqueda realizada correctamente");
 				trips=tripService.fetchTripByDpt(dptDeparture,dptArrival,startDate);
 			if(!trips.isEmpty()) {
 				model.addAttribute("trips", trips);
