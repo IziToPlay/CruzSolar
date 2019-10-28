@@ -78,8 +78,8 @@ public class TicketController {
 	public String connectClient(@PathVariable("id") long id,Model model) throws Exception {
 		model.addAttribute("ticket", new Ticket());
 		client=clientService.getOneById(id);
-		List<Client> clients = clientService.getAll();
-		model.addAttribute("clients",clients);
+		//List<Client> clients = clientService.getAll();
+		model.addAttribute("clients",client);
 		List<Seat> seats = seatService.findAllSeatsAvailables(trip.getId());
 		model.addAttribute("seats",seats);
 		model.addAttribute("success","Cliente seleccionado correctamente");
@@ -120,12 +120,6 @@ public class TicketController {
 		return "tickets/list";
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 	@PostMapping("/save")
     public String saveNewTicket(Ticket ticket, Model model) throws Exception {
