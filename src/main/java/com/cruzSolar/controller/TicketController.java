@@ -71,7 +71,6 @@ public class TicketController {
 		List<Seat> seats = seatService.findAllSeatsAvailables(trip.getId());
 		model.addAttribute("seats",seats);
 		return "tickets/new";
-		
 	}
 	
 	@GetMapping("/connect/{id}")
