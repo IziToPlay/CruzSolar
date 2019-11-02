@@ -22,6 +22,7 @@ import com.cruzSolar.service.ClientService;
 import com.cruzSolar.service.SeatService;
 import com.cruzSolar.service.TicketService;
 import com.cruzSolar.service.TripService;
+import com.cruzSolar.service.impl.TicketServiceImpl;
 
 @Controller
 @RequestMapping("/tickets")
@@ -41,6 +42,10 @@ public class TicketController {
 	
 	@Autowired
 	private ClientController clientController;
+	
+	@Autowired
+	private TicketServiceImpl ticketServiceImpl;
+	
 	
 	private Client client;
 	private Trip trip;
@@ -148,6 +153,13 @@ public class TicketController {
         model.addAttribute("success","Ticket actualizado correctamente");
         return "redirect:/tickets/list";    
     }
+	
+	@GetMapping("/delete/{id}")
+	public String deleteTicket(@PathVariable("id") Long ticketId, Model model) throws Exception {
+		ticketServiceImpl.delete(ticketId);
+		model.addAttribute("info", "Reserva eliminada correctamente");
+		return "redirect:/tickets/list";
+	}
 
 	public TicketService getTicketService() {
 		return ticketService;

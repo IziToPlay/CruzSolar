@@ -41,6 +41,8 @@
 							<th>Destino</th>
 							<th>Asiento</th>
 							<th>Editar</th>
+							<th>Eliminar</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -57,6 +59,8 @@
 						
 							<td><a th:href="@{'/tickets/edit/' + ${ticket.id} }"
 								class="btn btn-primary">Editar</a></td>
+							<td><a th:href="@{'/tickets/delete/' + ${ticket.id} }"
+								class="btn btn-danger">Eliminar</a></td>
 						</tr>
 					</tbody>
 				</table>
